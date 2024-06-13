@@ -44,7 +44,16 @@ bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
 //END_ASYNC
 
 //START_SYNC
-// Synchronous code can be placed here
+// Synchronous hash and compare
+try {
+    const hashSync = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+    console.log(hashSync + " <= this is the synchronous bcrypt hash");
+
+    const resultSync = bcrypt.compareSync(myPlaintextPassword, hashSync);
+    console.log(resultSync + " <= result here"); // True if passwords match
+} catch (err) {
+    console.error(err);
+}
 //END_SYNC
 
 const PORT = process.env.PORT || 3000;
